@@ -2085,7 +2085,7 @@ static int setup_mmal(struct device *dev, int nbufs, int do_encode, const char *
 		// Only supporting H264 at the moment
 		encoder_output->format->encoding = MMAL_ENCODING_H264;
 
-		encoder_output->format->bitrate = 10000000;
+		encoder_output->format->bitrate = 5000000;
 		encoder_output->buffer_size = 256<<10;//encoder_output->buffer_size_recommended;
 
 		if (encoder_output->buffer_size < encoder_output->buffer_size_min)
@@ -2131,7 +2131,7 @@ static int setup_mmal(struct device *dev, int nbufs, int do_encode, const char *
 		}
 
 		//set INLINE HEADER flag to generate SPS and PPS for every IDR if requested
-		if (mmal_port_parameter_set_boolean(encoder_output, MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER, 0) != MMAL_SUCCESS)
+		if (mmal_port_parameter_set_boolean(encoder_output, MMAL_PARAMETER_VIDEO_ENCODE_INLINE_HEADER, 1) != MMAL_SUCCESS)
 		{
 			print("failed to set INLINE HEADER FLAG parameters\n");
 			// Continue rather than abort..
